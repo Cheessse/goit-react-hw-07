@@ -1,27 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
+import { changeFilter, selectNameFilter } from "../../redux/filtersSlice";
 import css from "./SearchBox.module.css";
-import { changeFilter, selectFilterName } from "../../redux/filtersSlice";
-import "../../App.css";
+import { selectError, selectIsLoading } from "../../redux/contactsSlice";
 
 const SearchBox = () => {
   const dispatch = useDispatch();
-  const filterName = useSelector(selectFilterName);
+  const nameFilter = useSelector(selectNameFilter);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   const handleChange = (e) => {
     dispatch(changeFilter(e.target.value));
   };
 
   return (
-    <>
-      <h3 className="gradient-text">Find contacts by name</h3>
-      <input
-        type="text"
-        placeholder="Search by name"
-        value={filterName}
-        onChange={handleChange}
-        className={css.input}
-      />
-    </>
+    <div className={css.container}>
+      <h3 className={css.title}>Find contacts by name</h3>
+      <input type="text" value={nameFilter} onChange={handleChange} placeholder="Search by name" className={css.input} />
+      {isLoading && !error && <b>Request in progress...</b>}
+    </div>
   );
 };
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import css from "./ContactForm.module.css";
 import toast, { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
+import { addContact } from "../../redux/contactsOps";
 
 const ContactForm = () => {
   const [name, setName] = useState("");
@@ -40,20 +40,8 @@ const ContactForm = () => {
     <>
       <form onSubmit={handleSubmit} className={css.form}>
         <Toaster />
-        <input
-          type="text"
-          value={name}
-          onChange={handleChangeName}
-          placeholder="Name"
-          className={css.input}
-        />
-        <input
-          type="text"
-          value={phoneNumber}
-          onChange={handleChangePhoneNumber}
-          placeholder="Phone number"
-          className={css.input}
-        />
+        <input type="text" value={name} onChange={handleChangeName} placeholder="Name" className={css.input} />
+        <input type="text" value={phoneNumber} onChange={handleChangePhoneNumber} placeholder="Phone number" className={css.input} />
         <button type="submit" className={css.button}>
           Add contacts
         </button>
